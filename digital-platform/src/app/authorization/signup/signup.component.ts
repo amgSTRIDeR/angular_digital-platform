@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthorizationService } from '../../core/authorization.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -14,9 +14,9 @@ export class SignupComponent implements OnDestroy, OnInit{
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      email: new FormControl(this.authorizationService.getCurrentCredentials()[0]),
-      password: new FormControl(this.authorizationService.getCurrentCredentials()[1]),
-      phoneNumber: new FormControl(null),
+      email: new FormControl(this.authorizationService.getCurrentCredentials()[0], [Validators.required, Validators.email]),
+      password: new FormControl(this.authorizationService.getCurrentCredentials()[1], [Validators.required, Validators.minLength(6)]),
+      phoneNumber: new FormControl(null, Validators.required),
       position: new FormControl('student')
     })
 
