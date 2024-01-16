@@ -1,1 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    margin-top: 80px;
+
+    font-family: 'Roboto', sans-serif;
+    color: #FFFFFF;
+    background-color: #141C24;
+}
+
+button {
+    width: 100px;
+    height: 40px;
+    padding: 5px;
+
+    font-size: 20px;
+    text-decoration: inherit;
+
+    border: 1px solid #57D6FF;
+    border-radius: 3px;
+    color: inherit;
+    background-color: #02111B;
+
+    user-select: none;
+
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #57D6FF;
+    color: #02111B;
+    cursor: pointer;
+
+    transition: all 0.3s ease-in-out;
+}
+
+button:active {
+    background-color: #57D6FF;
+    color: #02111B;
+    padding: 4px;
+    border: 1px solid #02111B;
+
+    transition: all 0.1s ease-in-out;
+}
+
+input {
+    width: 200px;
+    height: 20px;
+    padding: 5px;
+
+    font-size: 20px;
+    text-decoration: inherit;
+
+    border: 1px solid #FFFFFF;
+    outline: none;
+    border-radius: 3px;
+    color: inherit;
+    background-color: #02111B;
+
+    user-select: none;
+
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus {
+    border: 1px solid #57D6FF;
+}

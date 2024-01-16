@@ -8,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './home/home.component';
+import { SigninComponent } from './authorization/signin/signin.component';
+import { SignupComponent } from './authorization/signup/signup.component';
 
 
 
@@ -16,7 +19,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppComponent,
     HeaderComponent,
     AuthorizationComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeComponent,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

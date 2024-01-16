@@ -1,0 +1,21 @@
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+button.active {
+    background-color: #57D6FF;
+}
+
+button.active:hover {
+    background-color: #57D6FF;
+    border: 1px solid #57D6FF;
+    border-radius: 3px;
+
+    color: inherit;
+    pointer-events: none;
+    cursor: default;
+}

@@ -1,7 +1,12 @@
 <header class="header">
-  <div class="header__logo">
-    <img src="assets/images/logo.png" alt="logo" />
-  </div>
-  <div class="header__title">
-  </div>
+    <ul class="nav-list">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/gradebook">Gradebook</a></li>
+      <li><a routerLink="/statistics">Statistics</a></li>
+      <li><a (click)="isUserLoggedIn ? onLogout() : onLogin()">Login/Logout</a></li>
+      <li class="logout-link" *ngIf="isUserLoggedIn; else userLogout"><a href="#" (click)="onLogout()">Logout</a></li>
+      <ng-template #userLogout>
+        <li class="login-link"><a href="#" routerLink="/authorization" routerLinkActive="hide">Entry</a></li>
+      </ng-template>
+    </ul>
 </header>
