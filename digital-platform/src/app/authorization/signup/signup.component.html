@@ -1,17 +1,19 @@
-<form>
-        <input type="text" placeholder="Email">
-        <input type="text" placeholder="Password">
-        <input type="text" placeholder="Phone number">
-    <div class="radio-wrapper">
-        <label>Student
-            <input type="radio" name="student" id="student">
-        </label>
-        <label>Teacher
-            <input type="radio" name="student" id="student">
-        </label>
-    </div>
-    <div class="buttons-wrapper">
-        <button>Clear</button>
-        <button type="submit">Submit</button>
-    </div>
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <input type="text" placeholder="Email" formControlName="email"/>
+  <input type="text" placeholder="Password" formControlName="password"/>
+  <input type="text" placeholder="Phone number" formControlName="phoneNumber"/>
+  <div class="radio-wrapper">
+    <label
+      >Student
+      <input type="radio" value="student" formControlName="position"/>
+    </label>
+    <label
+      >Teacher
+      <input type="radio" value="teacher" formControlName="position"/>
+    </label>
+  </div>
+  <div class="buttons-wrapper">
+    <button>Clear</button>
+    <button type="submit">Submit</button>
+  </div>
 </form>

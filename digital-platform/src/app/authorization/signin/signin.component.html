@@ -1,11 +1,11 @@
 <form (ngSubmit)="onSubmit()" #f="ngForm">
-  <input type="text" placeholder="Email" ngModel name="email" email #email="ngModel" required/>
+  <input type="text" placeholder="Email" ngModel name="email" email #email="ngModel" required [(ngModel)]="currentEmail"/>
   <p *ngIf="email.touched && email.invalid">Must be email type</p>
   <input type="password" placeholder="Password" ngModel name="password" #password="ngModel" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;,.?/~\\-]).{8,}$"
-  />
+  [(ngModel)]="currentPassword"/>
   <p *ngIf="password.touched && password.invalid">Must contains lowerCase and UpperCase latin letter, number and special symbol</p>
   <div class="buttons-wrapper">
     <button type="submit" [disabled]="f.invalid">Submit</button>
-    <button (click)="onClearForm()" [disabled]="!f.dirty">Clear</button>
+    <button (click)="onClearForm()" [disabled]="!currentEmail && !currentPassword">Clear</button>
   </div>
 </form>
