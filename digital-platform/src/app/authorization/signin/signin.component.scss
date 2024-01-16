@@ -29,3 +29,12 @@ label {
     display: flex;
     gap: 10px;
 }
+
+button:disabled {
+    background-color: grey;
+    color: #02111B;
+    padding: 4px;
+    border: 1px solid #02111B;
+
+    transition: all 0.1s ease-in-out;
+}

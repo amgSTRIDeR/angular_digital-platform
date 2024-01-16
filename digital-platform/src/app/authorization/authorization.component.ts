@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './authorization.component.scss'
 })
 export class AuthorizationComponent {
-
+  currentEmail: string = '';
+  currentPassword: string = '';
 }

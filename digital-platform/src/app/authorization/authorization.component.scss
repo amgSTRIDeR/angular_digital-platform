@@ -19,3 +19,15 @@ button.active:hover {
     pointer-events: none;
     cursor: default;
 }
+
+:host ::ng-deep .ng-dirty.ng-invalid {
+    border-color: red;
+}
+
+:host ::ng-deep .ng-dirty.ng-valid {
+    border-color: green;
+}
+
+:host ::ng-deep p {
+    text-align: center;
+}
