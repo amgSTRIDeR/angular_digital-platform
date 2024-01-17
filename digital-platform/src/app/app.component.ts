@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthorizationService } from './core/authorization.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'digital-platform';
+  isLoading = false;
+
+  constructor(private authorizationService: AuthorizationService) {
+    this.authorizationService.isLoading.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    }
+    );
+  }
 }

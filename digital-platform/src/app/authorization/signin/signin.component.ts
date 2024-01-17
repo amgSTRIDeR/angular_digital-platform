@@ -42,8 +42,9 @@ export class SigninComponent implements OnDestroy, OnInit {
         console.log(response);
         this.onClearForm();
         this.authorizationService.login();
+        this.authorizationService.isLoading.next(false);
       },
-      error: (error) => console.error(error),
+      error: (error) => {console.error(error); this.authorizationService.isLoading.next(false);},
     });
   }
 

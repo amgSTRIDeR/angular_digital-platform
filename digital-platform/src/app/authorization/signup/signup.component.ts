@@ -79,8 +79,8 @@ export class SignupComponent implements OnDestroy, OnInit {
     const email = this.signUpForm.value.email;
     const password = this.signUpForm.value.password;
     this.authorizationService.signUp(email, password).subscribe({
-      next: (response) => console.log(response),
-      error: (error) => console.error(error),
+      next: (response) => { console.log(response); this.authorizationService.isLoading.next(false); },
+      error: (error) => {console.error(error); this.authorizationService.isLoading.next(false);},
     });
     this.onClearForm();
   }
