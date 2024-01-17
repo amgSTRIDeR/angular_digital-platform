@@ -28,23 +28,19 @@ export class SigninComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.currentEmail = this.authorizationService.getCurrentCredentials()[0];
     this.currentPassword = this.authorizationService.getCurrentCredentials()[1];
-
-    setTimeout(() => {
-      if (this.currentEmail) {
-        this.signInForm.form.patchValue({
-          email: this.currentEmail,
-        });
-      }
-      if (this.currentPassword) {
-        this.signInForm.form.patchValue({
-          password: 'sdf',
-        });
-      }
-    }, 2000)
   }
 
   onSubmit() {
-    console.log(this.signInForm.value);
+    if (this.signInForm.invalid) {
+      return;
+    }
+    const email = this.signInForm.value.email;
+    const password = this.signInForm.value.password;
+
+    this.authorizationService.signIn(email, password).subscribe({
+      next: (response) => console.log(response),
+      error: (error) => console.error(error),
+    });
     this.signInForm.reset();
   }
 

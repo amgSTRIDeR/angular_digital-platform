@@ -35,12 +35,15 @@ export class SignupComponent implements OnDestroy, OnInit {
 
     this.signUpForm = new FormBuilder().group({
       email: [this.currentEmail, [Validators.required, Validators.email]],
-      password: [this.currentPassword, [Validators.required, this.passwordValidator]],
+      password: [
+        this.currentPassword,
+        [Validators.required, this.passwordValidator],
+      ],
       phoneNumber: ['', [Validators.required, this.phoneValidator]],
-      position: ['student', Validators.required]
-    })
+      position: ['student', Validators.required],
+    });
 
-    if(this.currentEmail) {
+    if (this.currentEmail) {
       this.signUpForm.get('email')?.markAsTouched();
       this.signUpForm.get('email')?.markAsDirty();
     }
@@ -69,14 +72,29 @@ export class SignupComponent implements OnDestroy, OnInit {
   }
 
   onSubmit() {
-    console.log(this.signUpForm.value);
-    this.signUpForm.reset();
-    this.signUpForm.patchValue({
-      email: '',
-      password: '',
-      phoneNumber: '',
-      position: 'student',
+    if (this.signUpForm.invalid) {
+      return;
+    }
+
+    const email = this.signUpForm.value.email;
+    const password = this.signUpForm.value.password;
+    this.authorizationService.signUp(email, password).subscribe({
+      next: (response) => console.log(response),
+      error: (error) => console.error(error),
     });
+    this.onClearForm();
+  }
+
+  onClearForm() {
+    this.signUpForm.patchValue(
+      {
+        email: '',
+        password: '',
+        phoneNumber: '',
+        position: 'student',
+      },
+      { emitEvent: false }
+    );
   }
 
   ngOnDestroy(): void {
