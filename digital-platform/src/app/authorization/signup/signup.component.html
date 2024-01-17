@@ -1,10 +1,10 @@
 <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
   <input type="text" placeholder="Email" formControlName="email"/>
   <p *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">Should be valid email</p>
-  <input type="text" placeholder="Password" formControlName="password"/>
+  <input type="password" placeholder="Password" formControlName="password"/>
   <p *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">Password must be strong</p>
   <input type="text" placeholder="Phone number" formControlName="phoneNumber"/>
-  <p *ngIf="signUpForm.get('phoneNumber')?.invalid && signUpForm.get('phoneNumber')?.touched">Phone number must contains 9 numbers</p>
+  <p *ngIf="signUpForm.get('phoneNumber')?.invalid && signUpForm.get('phoneNumber')?.touched">Phone number must contains 10 numbers</p>
   <div class="radio-wrapper">
     <label
       >Student
