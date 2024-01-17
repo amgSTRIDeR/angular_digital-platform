@@ -18,25 +18,25 @@ export class SignupComponent implements OnDestroy, OnInit {
   constructor(private authorizationService: AuthorizationService) {}
 
   ngOnInit(): void {
-    this.signUpForm = new FormGroup({
-      email: new FormControl(
-        this.authorizationService.getCurrentCredentials()[0],
-        [Validators.required, Validators.email]
-      ),
-      password: new FormControl(
-        this.authorizationService.getCurrentCredentials()[1],
-        [Validators.required, this.passwordValidator]
-      ),
-      phoneNumber: new FormControl(null, [Validators.required, this.phoneValidator]),
-      position: new FormControl('student'),
-    });
+    // this.signUpForm = new FormGroup({
+    //   email: new FormControl(
+    //     this.authorizationService.getCurrentCredentials()[0],
+    //     [Validators.required, Validators.email]
+    //   ),
+    //   password: new FormControl(
+    //     this.authorizationService.getCurrentCredentials()[1],
+    //     [Validators.required, this.passwordValidator]
+    //   ),
+    //   phoneNumber: new FormControl(null, [Validators.required, this.phoneValidator]),
+    //   position: new FormControl('student'),
+    // });
 
-    // this.signUpForm = new FormBuilder().group({
-    //   email: [this.authorizationService.getCurrentCredentials()[0]],
-    //   password: [this.authorizationService.getCurrentCredentials()[1]],
-    //   phoneNumber: [''],
-    //   position: ['student']
-    // })
+    this.signUpForm = new FormBuilder().group({
+      email: [this.authorizationService.getCurrentCredentials()[0], [Validators.required, Validators.email]],
+      password: [this.authorizationService.getCurrentCredentials()[1], [Validators.required, this.passwordValidator]],
+      phoneNumber: ['', [Validators.required, this.phoneValidator]],
+      position: ['student', Validators.required]
+    })
   }
 
   passwordValidator(control: FormControl): { [s: string]: boolean } {
