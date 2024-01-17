@@ -38,10 +38,13 @@ export class SigninComponent implements OnDestroy, OnInit {
     const password = this.signInForm.value.password;
 
     this.authorizationService.signIn(email, password).subscribe({
-      next: (response) => console.log(response),
+      next: (response) => {
+        console.log(response);
+        this.onClearForm();
+        this.authorizationService.login();
+      },
       error: (error) => console.error(error),
     });
-    this.signInForm.reset();
   }
 
   onClearForm() {
@@ -49,9 +52,9 @@ export class SigninComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-      this.authorizationService.setCurrentCredentials(
-        this.signInForm.value.email,
-        this.signInForm.value.password
-      );
+    this.authorizationService.setCurrentCredentials(
+      this.signInForm.value.email,
+      this.signInForm.value.password
+    );
   }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 interface AuthResponseData {
   idToken: string;
@@ -20,7 +21,7 @@ export class AuthorizationService {
   );
   currentEmail = '';
   currentPassword = '';
-  ApiKey = 'AIzaSyC5q_aPDywl5x7C_XuGrjg6SxwlvVviB84';
+  ApiKey = environment.apiKey;
 
   constructor(private http: HttpClient) {}
 
