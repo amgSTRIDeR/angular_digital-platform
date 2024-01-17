@@ -14,6 +14,8 @@ import {
 })
 export class SignupComponent implements OnDestroy, OnInit {
   signUpForm!: FormGroup;
+  currentEmail = this.authorizationService.getCurrentCredentials()[0];
+  currentPassword = this.authorizationService.getCurrentCredentials()[1];
 
   constructor(private authorizationService: AuthorizationService) {}
 
@@ -32,11 +34,21 @@ export class SignupComponent implements OnDestroy, OnInit {
     // });
 
     this.signUpForm = new FormBuilder().group({
-      email: [this.authorizationService.getCurrentCredentials()[0], [Validators.required, Validators.email]],
-      password: [this.authorizationService.getCurrentCredentials()[1], [Validators.required, this.passwordValidator]],
+      email: [this.currentEmail, [Validators.required, Validators.email]],
+      password: [this.currentPassword, [Validators.required, this.passwordValidator]],
       phoneNumber: ['', [Validators.required, this.phoneValidator]],
       position: ['student', Validators.required]
     })
+
+    if(this.currentEmail) {
+      this.signUpForm.get('email')?.markAsTouched();
+      this.signUpForm.get('email')?.markAsDirty();
+    }
+    if (this.currentPassword) {
+      this.signUpForm.markAsTouched();
+      this.signUpForm.get('password')?.markAsTouched();
+      this.signUpForm.get('password')?.markAsDirty();
+    }
   }
 
   passwordValidator(control: FormControl): { [s: string]: boolean } {
