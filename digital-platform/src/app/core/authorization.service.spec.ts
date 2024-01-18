@@ -102,38 +102,134 @@ describe('AuthorizationService', () => {
   it('should twrow an unknow error if errorRes.error or errorRes.error.error is undefined', () => {
     const dummyResponse = {
       error: undefined,
-    }
+    };
 
     const mockErrorStatus = { status: 400, statusText: 'Bad Request' };
 
     authorizationService.signUp('email', 'password').subscribe({
       error: (error) => {
         expect(error).toEqual('An unknown error occurred!');
-      }
-    })
+      },
+    });
 
-    const request = httpMock.expectOne(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${ApiKey}`);
+    const request = httpMock.expectOne(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${ApiKey}`
+    );
 
     request.flush(dummyResponse, mockErrorStatus);
   });
 
   it('Should twrow an "Too many attempts, try again later" error if errorRes.error.error.message is "TOO_MANY_ATTEMPTS_TRY_LATER"', () => {
     const dummyResponse = {
-        error: {
-          message: 'TOO_MANY_ATTEMPTS_TRY_LATER'
-      }
-    }
+      error: {
+        message: 'TOO_MANY_ATTEMPTS_TRY_LATER',
+      },
+    };
 
     const mockErrorStatus = { status: 400, statusText: 'Bad Request' };
 
     authorizationService.signUp('email', 'password').subscribe({
       error: (error) => {
         expect(error).toEqual('Too many attempts, try again later');
-      }
-    })
+      },
+    });
 
-    const request = httpMock.expectOne(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${ApiKey}`);
+    const request = httpMock.expectOne(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${ApiKey}`
+    );
 
     request.flush(dummyResponse, mockErrorStatus);
+  });
+
+  it('should sign in', () => {
+    const dummyResponse = {
+      kind: 'identitytoolkit#VerifyPasswordResponse',
+      localId: '9dhiQjqvdPRREPRruuWl9Jbisft2',
+      email: '1@gmail.com',
+      displayName: '',
+      refreshToken: '',
+      idToken:
+        'eyJhbGciOiJSUzI1NiIsImtpZCI6ImxrMDJBdyJ9.eyJpc3MiO…xyKviaq3lZ1wUI9W_LO1wcBt3i4sGGWAZxo6oXW9WO7yvYRoQ',
+      expiresIn: '3600',
+      registered: true,
+    };
+
+    authorizationService
+      .signIn('1@gmail.com', 'Password123!')
+      .subscribe((response) => {
+        expect(response).toEqual(dummyResponse);
+      });
+
+    const request = httpMock.expectOne(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ApiKey}`
+    );
+
+    expect(request.request.method).toBe('POST');
+
+    request.flush(dummyResponse);
+  });
+
+  it('Should throw an error if the email does not exist', () => {
+    const dummyErrorResponse = {
+      error: {
+        message: 'INVALID_LOGIN_CREDENTIALS',
+      },
+    };
+
+    const mockErrorStatus = { status: 400, statusText: 'Bad Request' };
+
+    authorizationService.signIn('1@gmail.com', 'password').subscribe({
+      error: (error) => {
+        expect(error).toEqual('Invalid login credentials');
+      },
+    });
+
+    const request = httpMock.expectOne(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ApiKey}`
+    );
+
+    request.flush(dummyErrorResponse, mockErrorStatus);
+  });
+
+  it('Should throw an error if user is disabled', () => {
+    const dummyErrorResponse = {
+      error: {
+        message: 'USER_DISABLED',
+      },
+    };
+
+    const mockErrorStatus = { status: 400, statusText: 'Bad Request' };
+
+    authorizationService.signIn('1@gmail.com', 'password').subscribe({
+      error: (error) => {
+        expect(error).toEqual('User disabled');
+      },
+    });
+
+    const request = httpMock.expectOne(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ApiKey}`
+    );
+
+    request.flush(dummyErrorResponse, mockErrorStatus);
+  });
+
+  it('Should throw an "An unknown error occurred!" if errorRes.error or errorRes.error.error is undefined', () => {
+    const dummyErrorResponse = {
+      error: undefined,
+    };
+
+    const mockErrorStatus = { status: 400, statusText: 'Bad Request' };
+
+    authorizationService.signIn('1@gmail.com', 'password').subscribe({
+      error: (error) => {
+        expect(error).toEqual('An unknown error occurred!');
+      },
+    });
+
+    const request = httpMock.expectOne(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ApiKey}`
+    );
+
+    request.flush(dummyErrorResponse, mockErrorStatus);
   });
 });

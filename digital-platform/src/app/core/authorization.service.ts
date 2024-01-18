@@ -80,9 +80,6 @@ export class AuthorizationService {
           return throwError(() => errorMessage);
         }
         switch (errorRes.error.error.message) {
-          case 'EMAIL_EXISTS':
-            errorMessage = 'This email exists already';
-            break;
           case 'INVALID_LOGIN_CREDENTIALS':
             errorMessage = 'Invalid login credentials';
             break;
