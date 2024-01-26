@@ -1,10 +1,7 @@
 import {
   Component,
-  EventEmitter,
-  Input,
   OnDestroy,
   OnInit,
-  Output,
   ViewChild,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -29,7 +26,7 @@ export class SigninComponent implements OnDestroy, OnInit {
     this.currentEmail = this.authorizationService.getCurrentCredentials()[0];
     this.currentPassword = this.authorizationService.getCurrentCredentials()[1];
   }
-
+  
   onSubmit() {
     if (this.signInForm.invalid) {
       return;

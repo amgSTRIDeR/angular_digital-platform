@@ -20,19 +20,6 @@ export class SignupComponent implements OnDestroy, OnInit {
   constructor(private authorizationService: AuthorizationService) {}
 
   ngOnInit(): void {
-    // this.signUpForm = new FormGroup({
-    //   email: new FormControl(
-    //     this.authorizationService.getCurrentCredentials()[0],
-    //     [Validators.required, Validators.email]
-    //   ),
-    //   password: new FormControl(
-    //     this.authorizationService.getCurrentCredentials()[1],
-    //     [Validators.required, this.passwordValidator]
-    //   ),
-    //   phoneNumber: new FormControl(null, [Validators.required, this.phoneValidator]),
-    //   position: new FormControl('student'),
-    // });
-
     this.signUpForm = new FormBuilder().group({
       email: [this.currentEmail, [Validators.required, Validators.email]],
       password: [
@@ -95,6 +82,10 @@ export class SignupComponent implements OnDestroy, OnInit {
       },
       { emitEvent: false }
     );
+  }
+
+  onFill() {
+    console.log('on Fill')
   }
 
   ngOnDestroy(): void {

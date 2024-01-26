@@ -4,7 +4,7 @@ import { AuthorizationService } from './core/authorization.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'digital-platform';
@@ -13,7 +13,6 @@ export class AppComponent {
   constructor(private authorizationService: AuthorizationService) {
     this.authorizationService.isLoading.subscribe((isLoading) => {
       this.isLoading = isLoading;
-    }
-    );
+    });
   }
 }
